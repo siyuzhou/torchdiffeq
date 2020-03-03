@@ -74,9 +74,9 @@ class VariableCoefficientAdamsBashforth(AdaptiveStepsizeODESolver):
         self.implicit = implicit
         self.first_step = first_step
         self.max_order = int(max(_MIN_ORDER, min(max_order, _MAX_ORDER)))
-        self.safety = _convert_to_tensor(safety, dtype=torch.float64, device=y0[0].device)
-        self.ifactor = _convert_to_tensor(ifactor, dtype=torch.float64, device=y0[0].device)
-        self.dfactor = _convert_to_tensor(dfactor, dtype=torch.float64, device=y0[0].device)
+        self.safety = _convert_to_tensor(safety, dtype=torch.get_default_dtype(), device=y0[0].device)
+        self.ifactor = _convert_to_tensor(ifactor, dtype=torch.get_default_dtype(), device=y0[0].device)
+        self.dfactor = _convert_to_tensor(dfactor, dtype=torch.get_default_dtype(), device=y0[0].device)
 
     def before_integrate(self, t):
         prev_f = collections.deque(maxlen=self.max_order + 1)
